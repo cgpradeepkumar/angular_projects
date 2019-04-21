@@ -1,0 +1,9 @@
+*, html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+
+.content {
+    width: 80%;
+}

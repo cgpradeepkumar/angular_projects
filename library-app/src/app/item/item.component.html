@@ -1,3 +1,28 @@
-<p>
-  item works!
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Language</th>
+      <th scope="col">Category</th>
+      <th scope="col">Type</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>{{item.title}}</td>
+      <td>{{item.author}}</td>
+      <td>{{item.publisher}}</td>
+      <td>{{item.language}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.type}}</td>
+      <td>{{item.isbn}}</td>
+      <td>{{item.price}}</td>
+    </tr>
+  </tbody>
+</table>
