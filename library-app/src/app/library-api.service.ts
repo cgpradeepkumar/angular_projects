@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, from } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { Item } from './item';
 
 const endpoint = 'http://localhost:8080/library/';
 const httpOptions = {
@@ -35,5 +36,10 @@ export class LibraryApiService {
       console.log(`${operation} failed: ${error.message}`)
       return of(result as T);
     };
+  }
+
+  public createItem(item: Item): Observable<any> {
+    console.log(item);
+    return this.http.post(endpoint + '/save', item);
   }
 }
