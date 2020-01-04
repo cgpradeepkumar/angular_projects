@@ -6,6 +6,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Item } from './item';
 
 const endpoint = 'http://localhost:8080/library/';
+var success = '';
+var failed = '';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -26,20 +28,20 @@ export class LibraryApiService {
     return body || {};
   }
 
-  getItems(): Observable<any> {
-    return this.http.get(endpoint + 'listAll').pipe(map(this.extractData));
+  getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(endpoint + 'items');
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      console.error('this is error handler ' + error);
       console.log(`${operation} failed: ${error.message}`)
       return of(result as T);
     };
   }
 
-  public createItem(item: Item): Observable<any> {
+  public createItem(item: Item): Observable<string> {
     console.log(item);
-    return this.http.post(endpoint + '/save', item);
+    return this.http.post<string>(endpoint + 'item', item);
   }
 }

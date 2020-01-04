@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryApiService } from '../library-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-item-list',
@@ -9,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ItemListComponent implements OnInit {
 
-  items: any = [];
+  items: Item[];
   constructor(public service: LibraryApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -17,9 +18,7 @@ export class ItemListComponent implements OnInit {
   }
 
   getItems() {
-    this.items = [];
-    this.service.getItems().subscribe((data: {}) => {
-      console.log(data);
+    this.service.getItems().subscribe(data => {
       this.items = data;
     });
   }

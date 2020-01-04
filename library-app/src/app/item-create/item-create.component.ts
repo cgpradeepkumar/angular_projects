@@ -9,26 +9,26 @@ import { LibraryApiService } from '../library-api.service';
 })
 export class ItemCreateComponent implements OnInit {
 
-  item : {title, author, publisher, language, category, type, isbn, price} = {title: '', author: '', publisher: '', language: '', category: '', type: '', isbn: '', price: null};
+  item: Item;
+  alerts: Array<string> = [];
   
-  constructor(public service: LibraryApiService) { }
+  constructor(public service: LibraryApiService) {
+    this.item = new Item();
+   }
 
   ngOnInit() {
   }
 
-  public createItem() {
-    //console.log(this.item);
-    const item_new = new Item();
-    item_new.title = this.item.title;
-    item_new.author = this.item.author;
-    item_new.language = this.item.language;
-    item_new.publisher = this.item.publisher;
-    item_new.category = this.item.category;
-    item_new.type = this.item.type;
-    item_new.price = this.item.price;
-
-    this.service.createItem(item_new);
-
-    this.item = {title: '', author: '', publisher: '', language: '', category: '', type: '', isbn: '', price: null};
+  onSubmit() {
+    console.log(this.item);
+    this.service.createItem(this.item).subscribe(response => {
+      console.log(response);
+      this.alerts.push('Created Successfully!');
+      this.item = new Item();
+    }, errors => {
+      console.log(errors);
+      this.alerts.push('Failed to create! Please try again');
+    });
   }
+
 }
