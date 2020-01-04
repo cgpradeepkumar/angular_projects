@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../item';
 import { LibraryApiService } from '../library-api.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-item-create',
@@ -12,7 +13,7 @@ export class ItemCreateComponent implements OnInit {
   item: Item;
   alerts: Array<string> = [];
   
-  constructor(public service: LibraryApiService) {
+  constructor(public service: LibraryApiService, public activeModal: NgbActiveModal) {
     this.item = new Item();
    }
 

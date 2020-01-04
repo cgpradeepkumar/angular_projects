@@ -12,7 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemCreateComponent } from './item-create/item-create.component';
-import { ItemEditComponent } from './item-edit/item-edit.component'
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { ItemEditComponent } from './item-edit/item-edit.component'
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ItemCreateComponent]
 })
 export class AppModule { }
