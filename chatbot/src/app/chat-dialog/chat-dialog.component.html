@@ -1,0 +1,24 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Chatbot</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross Click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+        <input [(ngModel)]="chat.message" type="text" name="message" id="message" placeholder="message">
+        <button type="button" (click)="onSubmit()">Send</button>
+      </p>
+
+      <div *ngFor="let c of chats | async">
+        <div class="container">{{c.message}}</div>
+        <div class="container reply">
+          <img src="/assets/images/chatbot-icon-8.jpg" class="right">
+          {{c.reply}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
