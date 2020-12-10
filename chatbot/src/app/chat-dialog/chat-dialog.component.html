@@ -8,16 +8,16 @@
     </div>
     <div class="modal-body">
       <p>
-        <input [(ngModel)]="chat.message" type="text" name="message" id="message" placeholder="message">
+        <input [(ngModel)]="message" type="text" name="message" id="message" placeholder="message">
         <button type="button" (click)="onSubmit()">Send</button>
       </p>
 
       <div *ngFor="let c of chats | async">
-        <div class="container">{{c.message}}</div>
-        <div class="container reply">
+        <div class="container">{{c.content}}</div>
+        <!-- <div class="container reply">
           <img src="/assets/images/chatbot-icon-8.jpg" class="right">
           {{c.reply}}
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
