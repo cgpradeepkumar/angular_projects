@@ -4,9 +4,9 @@ import { Chat } from '../chat/chat';
 import { ChatService } from '../chat/chat.service';
 
 import { environment } from "../../environments/environment";
-import { from, Observable, of } from 'rxjs';
+import { empty, from, Observable, of } from 'rxjs';
 import { BehaviorSubject } from "rxjs";
-import { scan } from 'rxjs/operators';
+import { filter, scan } from 'rxjs/operators';
 import { Message } from '../chat/message';
 
 @Component({
@@ -17,45 +17,32 @@ import { Message } from '../chat/message';
 export class ChatDialogComponent implements OnInit {
 
   message: string;
-  sessionId: string;
   chats: Observable<Message[]>;
   endpoint: string = environment.chatbotApi.URL;
   
   constructor(public chatService: ChatService, public activeModal: NgbActiveModal) {
-
-    // this.chat = new Chat();
-    // this.chat.sessionId = null;
-    // this.chat.message = '';
-    // this.chat.reply = '';
-
+    // this.chats = of([]);
+    this.message = '';
   }
 
   ngOnInit() {
     this.chats = this.chatService.conversation
     .asObservable()
-    
-    .pipe(
-      scan((acc, val) => acc.concat(val)));
+    .pipe(scan((acc, val) => acc.concat(val)));
   }
 
   onSubmit() {
     console.log('request -> ' + this.message);
-    // this.chatService.talk(this.chat).subscribe(response => {
-    //   console.log('response -> ' + response);
-    //   this.chat.sessionId = response.sessionId;
-    //   console.log('reply -> ' + response.reply);
-    //   console.log('sessionId -> ' + response.sessionId);
-    //   this.conversations.push(response); 
-    //   this.chat.message = '';    
-    // }, errors => {
-    //   console.log('errors -> ' + errors);
-    // });
-
     this.chatService.talk(this.message);
+    this.message = '';
   }
 
-  update(reply: Chat) {
-    
+  close() {
+    console.log('closing popup.......');
+    this.chatService.update(new Message('', ''));
+    // this.chats = empty();
+    // this.activeModal.close();
+    this.activeModal.dismiss();
   }
 
 }

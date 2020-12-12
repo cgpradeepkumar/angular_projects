@@ -1,23 +1,32 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">Chatbot</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross Click')">
+      <!-- <h4 class="modal-title">Chatbot</h4> -->
+      <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>
-        <input [(ngModel)]="message" type="text" name="message" id="message" placeholder="message">
-        <button type="button" (click)="onSubmit()">Send</button>
-      </p>
 
-      <div *ngFor="let c of chats | async">
-        <div class="container">{{c.content}}</div>
+      <ng-container *ngFor="let c of chats | async">
+        <div class="container" *ngIf="c.content !== ''">{{c.content}}</div>
         <!-- <div class="container reply">
           <img src="/assets/images/chatbot-icon-8.jpg" class="right">
           {{c.reply}}
         </div> -->
+      </ng-container>
+      <div class="container">
+        <!-- <form> -->
+          <div class="row">
+            <div class="col-md">
+              <input [(ngModel)]="message" type="text" name="message" placeholder="message" class="form-control input-lg"
+                ngbAutofocus>
+            </div>
+            <div class="col-md">
+              <button type="button" class="btn btn-primary" [disabled]="message === ''"
+                (click)="onSubmit()">Send</button>
+            </div>
+        <!-- </form> -->
       </div>
     </div>
   </div>
